@@ -13,6 +13,7 @@ public class MsgboardApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MsgboardApplication.class, args);
 	}
+	
 	@Bean
 	public DatabaseBean getDatabaseBean() {
 		DatabaseBean databaseBean = null;
