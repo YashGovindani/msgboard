@@ -4,7 +4,7 @@ import java.sql.*;
 import com.yash.govindani.msgboard.dto.*;
 
 public class AdministratorDAO {
-    public void add(Administrator administrator) throws DAOException {
+    public static void add(Administrator administrator) throws DAOException {
         try {
             Connection connection = DAOConnection.getConnection();
             PreparedStatement preparedStatement;

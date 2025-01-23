@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.yash.govindani.msgboard.beans.*;
+import com.yash.govindani.msgboard.dao.*;
+import com.yash.govindani.msgboard.dto.*;
+import com.yash.govindani.msgboard.utils.*;
 
 @Controller
 public class Administration {
@@ -17,16 +20,31 @@ public class Administration {
     }
     @PostMapping("/install")
     public String installMessageBoard(InstallationBean installationBean) {
-        System.out.println(installationBean.getDriver());
-        System.out.println(installationBean.getConnectionString());
-        System.out.println(installationBean.getUsername());
-        System.out.println(installationBean.getPassword());
-        System.out.println(installationBean.getAdministratorUsername());
-        System.out.println(installationBean.getAdministratorPassword());
-        // You need to write code to get tables created 
-        // If created, then set driver etc. in DAOConnection
-        // call add of AdministratorDAO
-        // if all is well return InstallationSuccessful
-        return "InstallationFailed";
+        try {
+        DatabaseUtility.createTables(installationBean.getDriver(), installationBean.getConnectionString(), installationBean.getUsername(), installationBean.getPassword());
+        } catch (DAOException exception) {
+            System.out.println("Unable to create tables"); // add to logs
+            return "InstallationFailed";
+        }
+        DAOConnection.setDriver(installationBean.getDriver());
+        DAOConnection.setConnectionString(installationBean.getConnectionString());
+        DAOConnection.setUsername(installationBean.getUsername());
+        DAOConnection.setPassword(installationBean.getPassword());
+        try {
+            Administrator administrator = new Administrator();
+            administrator.setUsername(installationBean.getUsername());
+            String passwordKey = EncryptionUtility.getKey();
+            String encryptedPassword = EncryptionUtility.encrypt(installationBean.getPassword(), passwordKey);
+            administrator.setPassword(encryptedPassword);
+            administrator.setPasswordKey(passwordKey);
+            AdministratorDAO.add(administrator);
+            return "InstallationSuccessful";
+        } catch (DAOException exception) {
+            System.out.println(exception.getMessage()); //  add to logs
+            return "InstallationFailed";
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage()); // add to logs
+            return "InstallationFailed";
+        }
     }
 }
