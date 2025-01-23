@@ -1,3 +1,10 @@
 /Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/MsgboardApplication.java
 /Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/beans/DatabaseBean.java
+/Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/beans/InstallationBean.java
+/Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/dao/AdministratorDAO.java
+/Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/dao/DAOConnection.java
+/Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/dao/DAOException.java
+/Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/dao/DatabaseUtility.java
+/Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/dto/Administrator.java
 /Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/services/Administration.java
+/Users/yash.govindani/msgboard/src/main/java/com/yash/govindani/msgboard/utils/EncryptionUtility.java
