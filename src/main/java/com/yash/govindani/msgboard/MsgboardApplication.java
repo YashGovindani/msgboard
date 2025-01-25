@@ -35,29 +35,29 @@ public class MsgboardApplication {
 	}
 
 	@Bean
-	@DependsOn("databaseBean")
+	// @DependsOn("databaseBean")
 	public MessageBoardBean getMessageBoardBean() {
 		MessageBoardBean messageBoardBean = new MessageBoardBean();
-		try {
-			Vector<Branch> branches = BranchDAO.getAll();
-			Vector<Semester> semesters = SemesterDAO.getAll();
-			for(int i = 0; i < branches.size(); i++) {
-				Branch branch = branches.get(i);
-				BranchBean branchBean = new BranchBean();
-				branchBean.setCode(branch.getCode());
-				branchBean.setTitle(branch.getTitle());
-				messageBoardBean.addBranch(branchBean);
-			}
-			for(int i = 0; i < semesters.size(); i++) {
-				Semester semester = semesters.get(i);
-				SemesterBean semesterBean = new SemesterBean();
-				semesterBean.setCode(semester.getCode());
-				semesterBean.setTitle(semester.getTitle());
-				messageBoardBean.addSemester(semesterBean);
-			}
-		} catch(Exception exception) {
-			System.out.println(exception.getMessage()); // later it should be logged somewhere
-		}
+		// try {
+		// 	Vector<Branch> branches = BranchDAO.getAll();
+		// 	Vector<Semester> semesters = SemesterDAO.getAll();
+		// 	for(int i = 0; i < branches.size(); i++) {
+		// 		Branch branch = branches.get(i);
+		// 		BranchBean branchBean = new BranchBean();
+		// 		branchBean.setCode(branch.getCode());
+		// 		branchBean.setTitle(branch.getTitle());
+		// 		messageBoardBean.addBranch(branchBean);
+		// 	}
+		// 	for(int i = 0; i < semesters.size(); i++) {
+		// 		Semester semester = semesters.get(i);
+		// 		SemesterBean semesterBean = new SemesterBean();
+		// 		semesterBean.setCode(semester.getCode());
+		// 		semesterBean.setTitle(semester.getTitle());
+		// 		messageBoardBean.addSemester(semesterBean);
+		// 	}
+		// } catch(Exception exception) {
+		// 	System.out.println(exception.getMessage()); // later it should be logged somewhere
+		// }
 		return messageBoardBean;
 	}
 }
